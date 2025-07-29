@@ -247,3 +247,12 @@ function gameLoop() {
 // Começa o jogo
 resetGame();
 setInterval(gameLoop, 120); // velocidade do jogo
+
+// Impede que a tela role durante o toque
+document.body.addEventListener('touchstart', function (e) {
+  e.preventDefault();
+}, { passive: false });
+
+document.body.addEventListener('touchmove', function (e) {
+  e.preventDefault();
+}, { passive: false });

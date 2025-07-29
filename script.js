@@ -36,7 +36,7 @@ let snake = [{ x: 9 * box, y: 9 * box }];
 // Gera posição da comida
 let food = pickFood();
 
-// Ouve teclas pressionadas
+// Controle por teclado (funciona em PC)
 document.addEventListener('keydown', e => {
   const key = e.key.toLowerCase();
   const map = {
@@ -52,6 +52,55 @@ document.addEventListener('keydown', e => {
     move.play();
   }
 });
+
+// Controle por swipe para celular (touchscreen)
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+const minSwipeDistance = 30; // distância mínima para considerar swipe
+
+// Evento quando o dedo toca a tela
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, false);
+
+// Evento quando o dedo sai da tela
+document.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  touchEndY = e.changedTouches[0].screenY;
+  handleSwipe();
+}, false);
+
+// Função que detecta direção do swipe
+function handleSwipe() {
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Se swipe muito curto, ignora
+  if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) return;
+
+  // Swipe horizontal
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0 && direction !== 'LEFT') {
+      direction = 'RIGHT';
+      move.play();
+    } else if (deltaX < 0 && direction !== 'RIGHT') {
+      direction = 'LEFT';
+      move.play();
+    }
+  } else {
+    // Swipe vertical
+    if (deltaY > 0 && direction !== 'UP') {
+      direction = 'DOWN';
+      move.play();
+    } else if (deltaY < 0 && direction !== 'DOWN') {
+      direction = 'UP';
+      move.play();
+    }
+  }
+}
 
 // Função pra gerar comida em lugar aleatório
 function pickFood() {
@@ -198,4 +247,3 @@ function gameLoop() {
 // Começa o jogo
 resetGame();
 setInterval(gameLoop, 120); // velocidade do jogo
-

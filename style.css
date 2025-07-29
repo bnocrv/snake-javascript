@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Fundo com imagem personalizada */
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, #430070, #000000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Press Start 2P', monospace;
+  color: #f8f8f2;
+  user-select: none;
+  flex-direction: column;
+}
+
+/* Canvas centralizado */
+canvas {
+  image-rendering: pixelated;
+  background: #1e1f2a;
+  border: 8px solid #6272a4;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  max-width: 90vw;  /* ajuste de tamanho */
+  height: auto;     
+}
+
+/* Placar centralizado acima do canvas */
+#score {
+  font-size: 20px;
+  color: #50fa7b;
+  margin-bottom: 16px;
+}
+
+/* Créditos no rodapé */
+#creditos {
+  font-size: 10px;
+  color: #6272a4;
+  margin-top: 20px;
+}
+
+/* Título do game */
+#titulo {
+  font-size: 14px;
+  color: #bd93f9;
+  margin-bottom: 12px;
+  text-align: center;
+}

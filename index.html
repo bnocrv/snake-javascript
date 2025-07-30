@@ -3,34 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Snake 8‑Bit Dracula – Bruno Carvalho</title>
+  <title>Snake Tournament</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#0f0" />
-
+  <meta name="theme-color" content="#0f0" />
 </head>
 <body>
-  <!-- Aqui mostra o título -->
-  <h1 id="titulo">Bruno's Snake Game</h1>
 
-
-  <!-- Aqui mostra o placar -->
+  <h1 id="titulo">Campeão: ______<br>com ___ pontos</h1>
   <div id="score">0</div>
-
-  <!-- Canvas onde o jogo acontece -->
   <canvas id="snake" width="608" height="608"></canvas>
+  <div id="creditos">Created by Bruno Carvalho</div>
+  <div id="premio">Prêmio semanal<br>Toda sexta-feira<br>PIX $20</div>
 
-  <!-- Créditos no canto -->
-<div id="creditos">
-  Created by Bruno Carvalho<br><br>
-  GitHub:
-  <a href="https://github.com/bnocrv" target="_blank" style="color: white; text-decoration: none;">bnocrv</a>
-</div>
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- Aqui vai o JavaScript -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDTgzi5L-yuG359GlSoY6jyi7tt5Erg9io",
+      authDomain: "snake-ranking-c9bea.firebaseapp.com",
+      projectId: "snake-ranking-c9bea",
+      storageBucket: "snake-ranking-c9bea.firebasestorage.app",
+      messagingSenderId: "468381360619",
+      appId: "1:468381360619:web:ea7bc9d15665220d7df9ae",
+      measurementId: "G-HC32V5CR6E"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+
   <script src="script.js"></script>
-  
-  
+
 </body>
 </html>
-

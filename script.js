@@ -1,3 +1,4 @@
+// Referências
 const cvs = document.getElementById('snake');
 const ctx = cvs.getContext('2d');
 const scoreEl = document.getElementById('score');
@@ -27,9 +28,13 @@ let food = pickFood();
 let highScore = 0;
 let highScoreName = '_______';
 
+// Firestore referência para doc único de recorde global
+const highScoreDocRef = db.collection("scores").doc("globalHighScore");
+
+// Carrega campeão salvo
 async function loadChampion() {
   try {
-    const doc = await db.collection("scores").doc("globalHighScore").get();
+    const doc = await highScoreDocRef.get();
     if (doc.exists) {
       const data = doc.data();
       highScore = data.score;
@@ -41,13 +46,14 @@ async function loadChampion() {
   }
 }
 
+// Atualiza recorde se pontuação for maior
 async function tryUpdateChampion(finalScore) {
   if (finalScore > highScore) {
     const name = prompt("🏆 Novo recorde! Digite seu nome:");
     if (!name) return;
 
     try {
-      await db.collection("scores").doc("globalHighScore").set({
+      await highScoreDocRef.set({
         name: name.trim(),
         score: finalScore
       });
@@ -196,7 +202,7 @@ document.addEventListener('keydown', e => {
   if (nd && nd !== opposite[direction]) {
     direction = nd;
     move.play();
-    e.preventDefault(); // ✅ impede scroll
+    e.preventDefault(); // impede scroll
   }
 }, false);
 

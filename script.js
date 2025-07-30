@@ -49,8 +49,10 @@ async function loadChampion() {
 // Atualiza recorde se pontuação for maior
 async function tryUpdateChampion(finalScore) {
   if (finalScore > highScore) {
-    const name = prompt("🏆 Novo recorde! Digite seu nome:");
-    if (!name) return;
+  let name = prompt("🏆 Novo recorde! Digite seu nome (máx. 20 caracteres):");
+if (!name) return;
+name = name.trim().slice(0, 20); // remove espaços e limita a 20 caracteres
+
 
     try {
       await highScoreDocRef.set({

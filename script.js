@@ -218,15 +218,18 @@ let touchEndY = 0;
 const minSwipeDistance = 30;
 
 document.addEventListener('touchstart', e => {
+  e.preventDefault(); // impõe bloqueio da rolagem
   touchStartX = e.changedTouches[0].screenX;
   touchStartY = e.changedTouches[0].screenY;
-}, false);
+}, { passive: false });
 
 document.addEventListener('touchend', e => {
+  e.preventDefault(); // impõe bloqueio da rolagem
   touchEndX = e.changedTouches[0].screenX;
   touchEndY = e.changedTouches[0].screenY;
   handleSwipe();
-}, false);
+}, { passive: false });
+
 
 function handleSwipe() {
   const deltaX = touchEndX - touchStartX;
